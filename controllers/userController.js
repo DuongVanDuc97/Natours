@@ -47,8 +47,6 @@ exports.resizePhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.createUser = (req, res) => {};
-
 const filterObj = (obj, ...allowedFields) => {
   let newObj = {};
   Object.keys(obj).forEach((el) => {
@@ -64,13 +62,17 @@ exports.getMe = (req, res, next) => {
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
+  // Create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
-        'This route is not for password updates. Please use /updateMyPassword'
+        'This route is not for password updates. Please use /updateMyPassword',
+        400
       )
     );
   }
+
+  // Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filterObj(req.body, 'name', 'email');
   if (req.file) filteredBody.photo = req.file.filename;
 
@@ -105,8 +107,11 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.createUser = factory.createOne(User);
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
 
+// Do NOT update password with this!
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
