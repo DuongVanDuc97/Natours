@@ -23,6 +23,7 @@ router.patch(
 );
 router.delete('/deleteMe', userController.deleteMe);
 
+// Restrict to only Admin
 router.use(authController.restrictTo('admin'));
 
 router
