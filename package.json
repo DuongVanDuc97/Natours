@@ -10,7 +10,7 @@
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
-    "build": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled",
+    "build:js": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled",
     "watch:js": "parcel watch --no-hmr ./public/js/index.js --dist-dir ./public/js/bundled"
   },
   "keywords": [],

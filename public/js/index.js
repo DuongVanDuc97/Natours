@@ -1,5 +1,3 @@
-console.log('from bundler');
-
 import { displayMap } from './leaflet';
 import { login, logout, updateUserData, updatePassword } from './login';
 import { bookTour } from './stripe';
