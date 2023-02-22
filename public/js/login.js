@@ -37,7 +37,7 @@ export const useFetch = async (url, uploadData = null, method = null) => {
 
 export const login = async (email, password) => {
   try {
-    const res = await useFetch('http://localhost:3000/api/v1/users/login', {
+    const res = await useFetch('/api/v1/users/login', {
       email,
       password,
     });
@@ -57,7 +57,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
-    const res = await useFetch('http://localhost:3000/api/v1/users/logout');
+    const res = await useFetch('/api/v1/users/logout');
 
     if (res.status === 'success') location.reload(true);
   } catch (error) {
@@ -84,15 +84,7 @@ export const updateUserData = async (data) => {
   form.append('photo', data.photo);
 
   try {
-    // const res = await useFetch(
-    //   'http://localhost:3000/api/v1/users/updateMe',
-    //   data,
-    //   'PATCH'
-    // );
-
-    // if (res.status !== 'success') return;
-
-    const res = await fetch('http://localhost:3000/api/v1/users/updateMe', {
+    const res = await fetch('/api/v1/users/updateMe', {
       method: 'PATCH',
       body: form,
     });
@@ -107,14 +99,9 @@ export const updateUserData = async (data) => {
   }
 };
 
-// type is either '
 export const updatePassword = async (data) => {
   try {
-    const res = await useFetch(
-      'http://localhost:3000/api/v1/users/updateMyPassword',
-      data,
-      'PATCH'
-    );
+    const res = await useFetch('/api/v1/users/updateMyPassword', data, 'PATCH');
 
     if (res.status !== 'success') return;
 

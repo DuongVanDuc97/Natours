@@ -7,13 +7,12 @@ const reviewRouter = require('./reviewRoutes');
 const router = express.Router();
 
 // PARAM MIDDLEWARE always have 4th argument
-router.param('id', (req, res, next, value) => {
-  console.log(`From param middleware: ${value}`);
-  next();
-});
+// router.param('id', (req, res, next, value) => {
+//   console.log(`From param middleware: ${value}`);
+//   next();
+// });
 
 router.use('/:tourId/reviews', reviewRouter);
-
 router
   .route('/top-5-cheap')
   .get(tourController.aliasTopTour, tourController.getAllTours);
