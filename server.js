@@ -13,19 +13,17 @@ dotenv.config({ path: './config.env' });
 const app = require('./app');
 
 // connect to mongodb
-
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('DB connected!'));
+
+async function dbConnect() {
+  await mongoose.connect(DB).then(() => {
+    console.log('Database connected!');
+  });
+}
+dbConnect().catch((err) => console.log(err));
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
